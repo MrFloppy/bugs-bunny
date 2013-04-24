@@ -1,0 +1,20 @@
+body {
+    background-color: lightgrey;
+    min-height: 1300px;
+    min-width: 800px;
+}
+
+#bugsBunny {
+    background-color: lightcoral;
+    height: 300px;
+    width: 300px;
+    /*Let this be high to ensure the box can always be seen*/
+    z-index: 9000;
+}
+
+.ui-resizable-handle {
+    position: absolute;
+    font-size: 0.1px;
+    z-index: 99999;
+    display: block;
+}
