@@ -6,10 +6,18 @@ body {
 
 #bugsBunny {
     background-color: lightcoral;
-    height: 300px;
+    height: 130px;
     width: 300px;
     /*Let this be high to ensure the box can always be seen*/
     z-index: 9000;
+    overflow: hidden;
+    font-size: 0.9em;
+    font-family: Verdana;
+    padding-left: 1em;
+}
+
+#handle {
+  cursor: move;
 }
 
 .ui-resizable-handle {
