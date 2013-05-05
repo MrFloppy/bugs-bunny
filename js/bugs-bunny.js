@@ -38,11 +38,16 @@ var bugsBunny  = (function(){
     $elem.css("left", viewportWidth  - offsetHorizontal);
   };
 
+  /**
+   * Get the browser info from the new attribute
+   */
   function getBrowser() {
     browser = navigator.sayswho || "undefined";
-//    browserType = BrowserDetect.browser;
   };
 
+  /**
+   * Get the current time (in german format atm)
+   */
   function getCurrentTime() {
     var currentTimestamp = new Date();
     time =
@@ -53,29 +58,42 @@ var bugsBunny  = (function(){
       + currentTimestamp.getMinutes();
   }
 
+  /**
+   * Get the client IP through a remote website
+   * The client IP is written into the container here
+   * to wait the request to finish
+   */
   function getClientIP() {
     $.getJSON('http://api.hostip.info/get_json.php', null,
       function(data){
-        clientIP = data.ip;
+        clientIP = data.ip || "undefined";
         $("#handle").after("<b>Client IP: </b>" + clientIP + "<br>");
       });
   };
 
+  /**
+   * Get the operating system of the client
+   */
   function getClientOS() {
-    browserOS = navigator.platform;
-//    browserOS = navigator.userAgent;
-//    browserOS = BrowserDetect.OS;
+    browserOS = navigator.platform || "undefined";
   };
 
+  /**
+   * Write all the information to the container
+   */
   function writeInfo() {
-//    container.append("<b>Client IP:</b>" + clientIP + "<br>");
     container.append("<b>Browser: </b>" + browser + "<br>");
     container.append("<b>OS: </b>" + browserOS + "<br>");
     container.append("<b>Date: </b>" + time + "<br>");
   };
 
+  /**
+   * A classical init function
+   */
   function init() {
+    //Define the target container here
     container = $("#bugsBunny");
+
     placeWindow(container);
     getBrowser();
     getClientIP();
@@ -83,10 +101,12 @@ var bugsBunny  = (function(){
     getCurrentTime();
     writeInfo();
 
+    //Make the container draggable
     container.draggable({
       handle: "p"
     });
 
+    //And make it resizable
     container.resizable({
       minHeight: 50,
       minWidth: 50
