@@ -1,13 +1,10 @@
 /**
- * Created with JetBrains PhpStorm.
- * User: MaximilianSohrt
+ * Author: MaximilianSohrt
  * Date: 23.04.13
  * Time: 14:08
- * To change this template use File | Settings | File Templates.
- *
- * http://help.dottoro.com/ljwupxoh.php
  */
 
+//Create a new attribute for the navigator object
 navigator.sayswho= (function(){
   var N= navigator.appName, ua= navigator.userAgent, tem;
   var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
@@ -27,6 +24,7 @@ var bugsBunny  = (function(){
     offsetVertical = 350,
     offsetHorizontal = 350,
     browser,
+    time,
     browserOS,
     clientIP
     ;
@@ -41,9 +39,19 @@ var bugsBunny  = (function(){
   };
 
   function getBrowser() {
-    browser = navigator.sayswho;
+    browser = navigator.sayswho || "undefined";
 //    browserType = BrowserDetect.browser;
   };
+
+  function getCurrentTime() {
+    var currentTimestamp = new Date();
+    time =
+      currentTimestamp.getDate() + "."
+      + (currentTimestamp.getMonth()+1) + "."
+      + currentTimestamp.getFullYear() + "-"
+      + currentTimestamp.getHours() + ":"
+      + currentTimestamp.getMinutes();
+  }
 
   function getClientIP() {
     $.getJSON('http://api.hostip.info/get_json.php', null,
@@ -63,6 +71,7 @@ var bugsBunny  = (function(){
 //    container.append("<b>Client IP:</b>" + clientIP + "<br>");
     container.append("<b>Browser: </b>" + browser + "<br>");
     container.append("<b>OS: </b>" + browserOS + "<br>");
+    container.append("<b>Date: </b>" + time + "<br>");
   };
 
   function init() {
@@ -71,6 +80,7 @@ var bugsBunny  = (function(){
     getBrowser();
     getClientIP();
     getClientOS();
+    getCurrentTime();
     writeInfo();
 
     container.draggable({
